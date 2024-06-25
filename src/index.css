@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.mainContainer {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(226, 226, 226);
+}
+/* ---------------LOG IN PAGE------------------- */
+.logIn {
+  width: 400px;
+  height: 400px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.233);
+}
+.heading {
+  margin: 0;
+}
+.inputField {
+  width: 80%;
+  margin-top: 20px;
+}
+.logIn input {
+  margin-top: 5px;
+  width: 100%;
+  padding: 10px 0px;
+  padding-left: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+.logIn input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+.loginBtn {
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  transition: 0.3s;
+  margin-bottom: 20px;
+}
+.loginBtn:hover {
+  background-color: #0056b3;
+}
+.create_acc p {
+  margin: 0;
+}
+/* ---------------------Sign Up Page---------------------*/
+.signUp {
+  width: 400px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.233);
+}
+.h1_signin {
+  margin-bottom: 0;
+}
+.signUp input {
+  margin-top: 5px;
+  width: 100%;
+  padding: 10px 0px;
+  padding-left: 5px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+.signUp input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+.signBtn {
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  transition: 0.3s;
+  margin-bottom: 20px;
+}
+.signBtn:hover {
+  background-color: #0056b3;
+}
+.Signin p {
+  margin-top: 0;
+}
+/* ---------------------- */
+.truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
