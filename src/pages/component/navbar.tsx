@@ -15,6 +15,9 @@ import {
   Paper,
   Menu,
   MenuItem,
+  Modal,
+  TextField,
+  Button,
 } from "@mui/material";
 import {
   Fullscreen,
@@ -58,6 +61,35 @@ export default function ResponsiveDrawer(props: Props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const [openModal, setOpenModal] = useState(false);
+  const [resourceData, setResourceData] = useState({
+    title: '',
+    subtitle: '',
+    description: '',
+    author: '',
+    weblink: '',
+    date: ''
+  });
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+    const { name, value } = e.target;
+    setResourceData({ ...resourceData, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    // Here you can handle submitting the form data, e.g., send to server or update state
+    console.log('Submitted:', resourceData);
+    // Optionally, you can close the modal after submission
+    handleCloseModal();
+  };
   const { backgroundColor, textColor } = darkMode
     ? darkThemeColors
     : { backgroundColor: "#fff", textColor: "#000" };
@@ -526,47 +558,123 @@ export default function ResponsiveDrawer(props: Props) {
       </Box>
 
       <main style={{ marginLeft: mobileOpen ? "280px" : "20px" }}>
-        <Box>
-          <Paper
-            elevation={3}
-            style={{
-              padding: 10,
-              marginTop: 80,
-              marginRight: "20px",
-              marginBottom: "20px",
-              backgroundColor: backgroundColor,
-              boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <div
+      <Box>
+      <Paper
+        elevation={3}
+        style={{
+          padding: 10,
+          marginTop: 80,
+          marginRight: '20px',
+          marginBottom: '20px',
+          backgroundColor: '#ffffff', // Set your desired background color here
+          boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <div style={{ color: '#21536f' }}>
+            <h2
               style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
+                margin: '0px',
+                marginLeft: '25px',
+                fontWeight: '600',
+                fontSize: '24px',
               }}
             >
-              <div
-                style={{
-                  color: " #21536f",
-                }}
-              >
-                <h2
-                  style={{
-                    margin: "0px",
-                    marginLeft: "25px",
-                    fontWeight: " 600",
-                    fontSize: "24px",
-                  }}
-                >
-                  Welcome back!
-                </h2>
-              </div>
-              <div style={{ color: "grey" }}>
-                <p style={{ margin: "0px" }}>Back / Dashboard</p>
-              </div>
-            </div>
-          </Paper>
+              Welcome back!
+            </h2>
+          </div>
+          <div style={{ color: 'grey' }}>
+            <Button variant="outlined" onClick={handleOpenModal}>
+              Add Resource
+            </Button>
+          </div>
+        </div>
+      </Paper>
+
+      {/* Modal for adding resource */}
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="add-resource-modal"
+        aria-describedby="modal-to-add-resource"
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <h2>Add Resource</h2>
+          <TextField
+            fullWidth
+            label="Title"
+            name="title"
+            value={resourceData.title}
+            onChange={handleInputChange}
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            label="Subtitle"
+            name="subtitle"
+            value={resourceData.subtitle}
+            onChange={handleInputChange}
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            label="Description"
+            name="description"
+            value={resourceData.description}
+            onChange={handleInputChange}
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            label="Author"
+            name="author"
+            value={resourceData.author}
+            onChange={handleInputChange}
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            label="Web Link"
+            name="weblink"
+            value={resourceData.weblink}
+            onChange={handleInputChange}
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            label="Date"
+            name="date"
+            type="date"
+            value={resourceData.date}
+            onChange={handleInputChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+          />
+          <Button variant="contained" onClick={handleSubmit}>
+            Add
+          </Button>
         </Box>
+      </Modal>
+    </Box>
         <Outlet />
       </main>
     </div>
