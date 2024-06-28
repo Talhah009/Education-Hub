@@ -7,6 +7,7 @@ import Resources from "../pages/component/Resources";
 import MainAppLayout from "./MainAppLayout";
 import MyResources from "../pages/component/MyResources";
 import SavedResources from "../pages/component/SavedResources";
+import CustomCard from "../pages/component/detailResource";
 
 const _MainAppRoutes = () => {
   const MainRoutes = {
@@ -29,6 +30,10 @@ const _MainAppRoutes = () => {
       {
         path: "/SavedResources",
         element: <SavedResources />,
+      },
+      {
+        path: "/DetailsResouces",
+        element: <CustomCard title={""} subtitle={""} description={""} isFavorite={false} />,
       },
       {
         path: "*",

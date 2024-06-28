@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-// import { toggleDarkMode } from "../../store/slice";
-import { hover } from "@testing-library/user-event/dist/hover";
+import { useNavigate } from "react-router-dom";
 
 interface CardData {
   id: number;
   title: string;
-  desc:string;
+  desc: string;
   numbers: number;
   imgSrc: string;
 }
@@ -16,28 +15,28 @@ const fakeData: CardData[] = [
   {
     id: 1,
     title: "Reviewers",
-    desc:"This will show you the structure of the orders table, including the newly added total_amount column.",
+    desc: "This will show you the structure of the orders table, including the newly added total_amount column.",
     numbers: 10,
     imgSrc: require("../../assets/user.png"),
   },
   {
     id: 2,
     title: "Contributor",
-    desc:"This will show you the structure of the orders table, including the newly added total_amount column.",
+    desc: "This will show you the structure of the orders table, including the newly added total_amount column.",
     numbers: 15,
     imgSrc: require("../../assets/users.png"),
   },
   {
     id: 3,
     title: "Resource",
-    desc:"This will show you the structure of the orders table, including the newly added total_amount column.",
+    desc: "This will show you the structure of the orders table, including the newly added total_amount column.",
     numbers: 5,
     imgSrc: require("../../assets/document-signed.png"),
   },
   {
     id: 4,
     title: "Category",
-    desc:"This will show you the structure of the orders table, including the newly added total_amount column.",
+    desc: "This will show you the structure of the orders table, including the newly added total_amount column.",
     numbers: 20,
     imgSrc: require("../../assets/apps.png"),
   },
@@ -55,12 +54,16 @@ const darkThemeColors: DarkThemeColors = {
 
 const MyCard: React.FC<CardData> = ({ title, numbers, imgSrc, desc }) => {
   const darkMode = useSelector((state: any) => state.user.darkMode);
-
+  const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
 
   const { backgroundColor, textColor } = darkMode
     ? darkThemeColors
     : { backgroundColor: "#fff", textColor: "#000" };
+
+  const cardClick = () => {
+    navigate("/DetailsResources"); 
+  };
 
   return (
     <Grid item xs={12} sm={6} md={3} xl={3}>
@@ -73,10 +76,11 @@ const MyCard: React.FC<CardData> = ({ title, numbers, imgSrc, desc }) => {
           color: textColor,
           transition: "transform 0.5s ease",
           transform: hovered ? "scale(1.03)" : "scale(1)",
-          boxShadow: hovered? "0 0 15px rgb(0 0 0 / 45%)": "",
+          boxShadow: hovered ? "0 0 15px rgb(0 0 0 / 45%)" : "",
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        onClick={cardClick} // Attach onClick event to trigger cardClick function
       >
         <CardContent style={{ display: "flex", alignItems: "center" }}>
           <div
@@ -98,7 +102,7 @@ const MyCard: React.FC<CardData> = ({ title, numbers, imgSrc, desc }) => {
             <Typography variant="h5" component="div">
               {title}
             </Typography>
-            <Typography  variant="body2" component="div" className="truncate">
+            <Typography variant="body2" component="div" className="truncate">
               {desc}
             </Typography>
             <Typography
@@ -122,18 +126,9 @@ const MyCard: React.FC<CardData> = ({ title, numbers, imgSrc, desc }) => {
 const MyCardList: React.FC = () => {
   return (
     <Grid container spacing={2}>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          width: "100%",
-          marginRight: "20px",
-        }}
-      >
-        {fakeData.map((data) => (
-          <MyCard key={data.id} {...data} />
-        ))}
-      </div>
+      {fakeData.map((data) => (
+        <MyCard key={data.id} {...data} />
+      ))}
     </Grid>
   );
 };
