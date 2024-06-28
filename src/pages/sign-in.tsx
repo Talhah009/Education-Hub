@@ -1,8 +1,8 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { handleChange, handleLogin } from "../store/userSlice/index";
 import { RootState } from "../store";
+import apiServices from "../services/requesthandler";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -14,14 +14,23 @@ const SignIn = () => {
     dispatch(handleChange({ name, value } as any));
   };
 
-  const handleLoginClick = () => {
-    dispatch(handleLogin(navigate as any));
+  const handleLoginClick = async () => {
+    try {
+    const response = await apiServices.postFromApi("/users/user-signin", {
+        email: userSlice.email,
+        password: userSlice.password,
+      });
+      console.log(response);
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+    // dispatch(handleLogin(navigate as any));
   };
 
   return (
     <div className="mainContainer">
       <div className="logIn">
-      <h1 className="heading">Log In</h1>
+        <h1 className="heading">Log In</h1>
         <div className="inputField">
           <label>Email</label>
           <input
@@ -49,7 +58,7 @@ const SignIn = () => {
           </button>
         </div>
         <div className="create_acc">
-        <Link to="/SignUp">
+          <Link to="/SignUp">
             <p>Create Account</p>
           </Link>
         </div>

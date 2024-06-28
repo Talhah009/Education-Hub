@@ -55,19 +55,24 @@ const userSlice = createSlice({
       state.password = "";
     },
     handleLogin: (state, payload) => {
-      const { email, password, submittedData } = state;
-      const nav = payload.payload;
+      const { email, password } = state;
+      console.log(email, password);
 
-      const userMatch = submittedData.find(
-        (user) => user.email === email && user.password === password
-      );
-      if (userMatch) {
-        state.isLoggedIn = true;
-        localStorage.setItem("user", JSON.stringify(userMatch));
-        nav("/home");
-      } else {
-        alert("Incorrect email or password.");
-      }
+      
+      
+
+      // const nav = payload.payload;
+
+      // const userMatch = submittedData.find(
+      //   (user) => user.email === email && user.password === password
+      // );
+      // if (userMatch) {
+      //   state.isLoggedIn = true;
+      //   localStorage.setItem("user", JSON.stringify(userMatch));
+      //   nav("/home");
+      // } else {
+      //   alert("Incorrect email or password.");
+      // }
     },
     handleLogout: (state) => {
       state.isLoggedIn = false;
