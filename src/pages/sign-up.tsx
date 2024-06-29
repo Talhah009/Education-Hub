@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { handleChange, handleSubmit } from "../store/userSlice/index";
 import { RootState } from "../store";
+import apiServices from "../services/requesthandler";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -13,9 +14,30 @@ const SignUp = () => {
     const { name, value } = e.target;
     dispatch(handleChange({ name, value } as any));
   };
-  const handleClick = () => {
+  const handleClick = async () => {
     try {
-      dispatch(handleSubmit(navigate("/")));
+      const resp = await apiServices.postFromApi("users", {
+        firstname: userSlice.firstName,
+        lastname: userSlice.lastName,
+        email: userSlice.email,
+        password: userSlice.password,
+        password_confirm: userSlice.password,
+      });
+      console.log(resp);
+      if (resp.status === 201) {
+        alert("SAVE HOGAYA");
+        navigate("/");
+      } else {
+        alert(
+          resp?.error?.error ??
+            resp?.error?.isEmail ??
+            resp?.error?.isNotEmpty ??
+            resp?.error?.message ??
+            resp?.message ??
+            "Internal Server Error: An error occured while submitting the request please try again later, of error occured again then try contact to our Support Team"
+        );
+      }
+      // dispatch(handleSubmit(navigate("/")));
     } catch (error) {
       console.log(error);
     }

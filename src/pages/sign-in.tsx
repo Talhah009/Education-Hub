@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleChange, handleLogin } from "../store/userSlice/index";
 import { RootState } from "../store";
 import apiServices from "../services/requesthandler";
+import { saveDataToLocalStorage } from "../utils/LocalStore.util";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -16,11 +17,26 @@ const SignIn = () => {
 
   const handleLoginClick = async () => {
     try {
-    const response = await apiServices.postFromApi("/users/user-signin", {
+      const resp = await apiServices.postFromApi("/users/user-signin", {
         email: userSlice.email,
         password: userSlice.password,
       });
-      console.log(response);
+      if (resp.status === 201) {
+        saveDataToLocalStorage("user", resp.status);
+        saveDataToLocalStorage("token", resp.status);
+        navigate("/homepage");
+      } else {
+        alert(
+          resp?.error?.error ??
+            resp?.error?.isEmail ??
+            resp?.error?.isNotEmpty ??
+            resp?.error?.message ??
+            resp?.message ??
+            "Internal Server Error: An error occured while submitting the request please try again later, of error occured again then try contact to our Support Team"
+        );
+      }
+
+      // console.log(response);
     } catch (error) {
       console.log((error as Error).message);
     }

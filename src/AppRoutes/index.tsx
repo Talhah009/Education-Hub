@@ -21,7 +21,7 @@ const _MainAppRoutes = () => {
 
       {
         path: "/Resources",
-        element: <Resources/>,
+        element: <Resources />,
       },
       {
         path: "/MyResources",
@@ -32,12 +32,19 @@ const _MainAppRoutes = () => {
         element: <SavedResources />,
       },
       {
-        path: "/DetailsResouces",
-        element: <CustomCard title={""} subtitle={""} description={""} isFavorite={false} />,
+        path: "/DetailsResources/:id",
+        element: (
+          <CustomCard
+            title={"HEY"}
+            subtitle={""}
+            description={""}
+            isFavorite={false}
+          />
+        ),
       },
       {
         path: "*",
-        element: <HomePage/>,
+        element: <HomePage />,
       },
     ],
   };

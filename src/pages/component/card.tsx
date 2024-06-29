@@ -62,8 +62,9 @@ const MyCard: React.FC<CardData> = ({ title, numbers, imgSrc, desc }) => {
     : { backgroundColor: "#fff", textColor: "#000" };
 
   const cardClick = () => {
-    navigate("/DetailsResources"); 
+    navigate("/DetailsResources/2301320201"); 
   };
+
 
   return (
     <Grid item xs={12} sm={6} md={3} xl={3}>
@@ -124,6 +125,16 @@ const MyCard: React.FC<CardData> = ({ title, numbers, imgSrc, desc }) => {
 };
 
 const MyCardList: React.FC = () => {
+
+
+
+
+
+
+
+
+
+
   return (
     <Grid container spacing={2}>
       {fakeData.map((data) => (

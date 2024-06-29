@@ -112,3 +112,9 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.table-head {
+  font-weight: bold !important;
+  font-size: 18px !important;
+  color: black !important;
+}

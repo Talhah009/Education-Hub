@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getDataFromLocalStorage } from "../utils/LocalStore.util";
 
+// export const BASE_URL = "http://192.168.100.63:2020/api/v1/";
 export const BASE_URL = "http://localhost:2020/api/v1/";
 
 export const getApiRequestHeader = async () => {
